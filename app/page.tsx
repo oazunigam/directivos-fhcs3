@@ -1,31 +1,60 @@
 'use client'
 
-import { useEffect } from 'react'
-import { supabase } from '../src/lib/supabase'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/src/lib/supabase'
 
 export default function HomePage() {
 
+  const [personas, setPersonas] = useState<any[]>([])
+
   useEffect(() => {
 
-    async function testConnection() {
+    async function cargarPersonas() {
 
       const { data, error } = await supabase
         .from('personas')
         .select('*')
 
-      console.log('DATA:', data)
-      console.log('ERROR:', error)
+      console.log(data)
+      console.log(error)
+
+      if (data) {
+        setPersonas(data)
+      }
     }
 
-    testConnection()
+    cargarPersonas()
 
   }, [])
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-      <h1 className="text-5xl font-bold">
-        Conexión Supabase Okkkk
+    <main className="min-h-screen bg-zinc-950 text-white p-10">
+
+      <h1 className="text-5xl font-bold mb-10">
+        Directivos Académicos
       </h1>
+
+      <div className="grid gap-6">
+
+        {personas.map((persona) => (
+
+          <div
+            key={persona.id}
+            className="border border-zinc-800 bg-zinc-900 rounded-2xl p-6"
+          >
+            <h2 className="text-2xl font-bold">
+              {persona.nombre}
+            </h2>
+
+            <p className="text-zinc-400 mt-2">
+              {persona.cargo}
+            </p>
+          </div>
+
+        ))}
+
+      </div>
+
     </main>
   )
 }
