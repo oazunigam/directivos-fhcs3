@@ -39,16 +39,35 @@ export default function HomePage() {
         {personas.map((persona) => (
 
           <div
-            key={persona.id}
-            className="border border-zinc-800 bg-zinc-900 rounded-2xl p-6"
+          key={persona.id}
+          className="
+            border border-zinc-800
+            bg-zinc-900
+            rounded-2xl
+            p-6
+            hover:border-zinc-600
+            transition
+            duration-300
+          "
           >
-            <h2 className="text-2xl font-bold">
-              {persona.nombre}
-            </h2>
+            <div className="flex items-start justify-between">
 
-            <p className="text-zinc-400 mt-2">
-              {persona.cargo}
-            </p>
+            <div>
+              <h2 className="text-2xl font-bold">
+                {persona.nombre}
+              </h2>
+
+              <p className="text-zinc-400 mt-2">
+                {persona.cargo}
+              </p>
+            </div>
+
+            <div className="text-3xl">
+              👤
+            </div>
+
+            </div>
+            </div>
           </div>
 
         ))}
