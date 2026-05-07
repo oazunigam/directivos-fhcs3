@@ -34,7 +34,7 @@ export default function HomePage() {
         Directivos Académicos
       </h1>
 
-      <div className="grid gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
 
         {personas.map((persona) => (
 
