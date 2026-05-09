@@ -161,11 +161,11 @@ export default function Home() {
               <div className="text-right">
 
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">
+                  <span className="font-bold text-lg text-slate-900">
                     Tiempo acumulado
                   </span>
 
-                  <p className="font-bold text-lg text-slate-900">
+                  <p className="text-sm text-gray-500">
                     {n.tiempo_acumulado_hoy} años
                   </p>
                 </div>
