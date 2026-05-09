@@ -78,7 +78,7 @@ export default function Home() {
         </p>
       </div>
 
-      {/* TARJETAS KPI */}
+      {/* KPIS */}
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
 
@@ -149,7 +149,7 @@ export default function Home() {
 
             <div className="flex justify-between items-center">
 
-              {/* INFORMACIÓN IZQUIERDA */}
+              {/* IZQUIERDA */}
 
               <div>
 
@@ -167,9 +167,11 @@ export default function Home() {
 
               </div>
 
-              {/* INFORMACIÓN DERECHA */}
+              {/* DERECHA */}
 
               <div className="flex items-center gap-14">
+
+                {/* ESTADO */}
 
                 <div>
                   <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
@@ -190,6 +192,8 @@ export default function Home() {
                   </span>
                 </div>
 
+                {/* VIGENCIA */}
+
                 <div>
                   <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
                     Vigencia
@@ -200,15 +204,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Períodos
-                  </p>
-
-                  <p className="font-semibold text-slate-900">
-                    {n.periodos_totales_nombramiento}
-                  </p>
-                </div>
+                {/* TIEMPO ACUMULADO */}
 
                 <div>
                   <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
@@ -217,6 +213,30 @@ export default function Home() {
 
                   <p className="font-semibold text-slate-900">
                     {n.tiempo_acumulado_hoy} años
+                  </p>
+                </div>
+
+                {/* TIEMPO RESTANTE */}
+
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Tiempo restante
+                  </p>
+
+                  <p className="font-semibold text-slate-900">
+                    {n.tiempo_restante} años
+                  </p>
+                </div>
+
+                {/* PERIODOS */}
+
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Períodos
+                  </p>
+
+                  <p className="font-semibold text-slate-900">
+                    {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
                   </p>
                 </div>
 
