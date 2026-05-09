@@ -5,10 +5,15 @@ import { supabase } from '../src/lib/supabase'
 
 type Nombramiento = {
   id: number
+
   nombres: string
   apellidos: string
+
   cargo: string
   dependencia: string
+
+  fecha_inicio: string
+  fecha_fin: string
 
   tiempo_acumulado_hoy: number
   tiempo_total_nombramiento: number
@@ -21,6 +26,8 @@ type Nombramiento = {
   proximo_a_vencer: boolean
   nombramiento_reciente: boolean
   requiere_autorizacion: boolean
+
+  estado: string
 }
 
 export default function Home() {
@@ -140,7 +147,9 @@ export default function Home() {
             className="bg-white rounded-2xl p-6 shadow"
           >
 
-            <div className="flex justify-between items-start">
+            <div className="flex justify-between items-center">
+
+              {/* INFORMACIÓN IZQUIERDA */}
 
               <div>
 
@@ -158,50 +167,60 @@ export default function Home() {
 
               </div>
 
-              <div className="flex gap-16 items-start">
+              {/* INFORMACIÓN DERECHA */}
 
-              <div className="text-center">
-                <span className="text-sm text-gray-500 block">
-                  Tiempo acumulado
-                </span>
+              <div className="flex items-center gap-14">
 
-                <p className="font-bold text-2xl text-slate-900">
-                  {n.tiempo_acumulado_hoy}
-                </p>
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Estado
+                  </p>
 
-                <span className="text-sm text-gray-500">
-                  años
-                </span>
-              </div>
-
-              <div className="text-center">
-                <span className="text-sm text-gray-500 block">
-                  Tiempo restante
-                </span>
-
-                <p className="font-bold text-2xl text-slate-900">
-                  {n.tiempo_restante}
-                </p>
-
-                <span className="text-sm text-gray-500">
-                  años
-                </span>
-              </div>
-
-              <div className="text-center">
-                <span className="text-sm text-gray-500 block">
-                  Periodos
-                </span>
-
-                <p className="font-bold text-2xl text-slate-900">
-                  {n.periodos_acumulados}
-                  <span className="text-gray-400">
-                    {' '} / {n.periodos_totales_nombramiento}
+                  <span
+                    className={`
+                      px-4 py-1 rounded-full text-sm font-semibold
+                      ${
+                        n.estado === 'activo'
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-red-100 text-red-700'
+                      }
+                    `}
+                  >
+                    {n.estado}
                   </span>
-                </p>
-              </div>
+                </div>
 
-            </div>
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Vigencia
+                  </p>
+
+                  <p className="font-semibold text-slate-900">
+                    {n.fecha_inicio} - {n.fecha_fin}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Períodos
+                  </p>
+
+                  <p className="font-semibold text-slate-900">
+                    {n.periodos_totales_nombramiento}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                    Tiempo acumulado
+                  </p>
+
+                  <p className="font-semibold text-slate-900">
+                    {n.tiempo_acumulado_hoy} años
+                  </p>
+                </div>
+
+              </div>
 
             </div>
 
