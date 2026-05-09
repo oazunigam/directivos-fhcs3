@@ -169,8 +169,6 @@ export default function Home() {
 
               {/* DERECHA */}
 
-              {/* DERECHA */}
-
             <div className="flex items-center gap-12">
 
             {/* ESTADO */}
@@ -197,23 +195,37 @@ export default function Home() {
             {/* VIGENCIA */}
 
             <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-2">
                 Vigencia
               </p>
 
-              <p className="font-semibold text-slate-900">
-                {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-                {' - '}
-                {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </p>
+              <div className="space-y-1">
+
+                <p className="font-semibold text-slate-900 text-sm">
+                  Inicio:
+                </p>
+
+                <p className="text-slate-700 text-sm">
+                  {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+
+                <p className="font-semibold text-slate-900 text-sm mt-2">
+                  Fin:
+                </p>
+
+                <p className="text-slate-700 text-sm">
+                  {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+
+              </div>
             </div>
 
             {/* TIEMPO TOTAL NOMBRAMIENTO */}
