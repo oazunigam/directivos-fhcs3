@@ -169,78 +169,126 @@ export default function Home() {
 
               {/* DERECHA */}
 
-              <div className="flex items-center gap-14">
+              {/* DERECHA */}
 
-                {/* ESTADO */}
+            <div className="flex items-center gap-12">
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Estado
-                  </p>
+            {/* ESTADO */}
 
-                  <span
-                    className={`
-                      px-4 py-1 rounded-full text-sm font-semibold
-                      ${
-                        n.estado === 'activo'
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-red-100 text-red-700'
-                      }
-                    `}
-                  >
-                    {n.estado}
-                  </span>
-                </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Estado
+              </p>
 
-                {/* VIGENCIA */}
+              <span
+                className={`
+                  px-4 py-1 rounded-full text-sm font-semibold
+                  ${
+                    n.estado === 'activo'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700'
+                  }
+                `}
+              >
+                {n.estado}
+              </span>
+            </div>
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Vigencia
-                  </p>
+            {/* VIGENCIA */}
 
-                  <p className="font-semibold text-slate-900">
-                    {n.fecha_inicio} - {n.fecha_fin}
-                  </p>
-                </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Vigencia
+              </p>
 
-                {/* TIEMPO ACUMULADO */}
+              <p className="font-semibold text-slate-900">
+                {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+                {' - '}
+                {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </p>
+            </div>
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Tiempo acumulado
-                  </p>
+            {/* TIEMPO TOTAL NOMBRAMIENTO */}
 
-                  <p className="font-semibold text-slate-900">
-                    {n.tiempo_acumulado_hoy} años
-                  </p>
-                </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Tiempo total nombramiento
+              </p>
 
-                {/* TIEMPO RESTANTE */}
+              <p className="font-semibold text-slate-900">
+                {n.tiempo_total_nombramiento} años
+              </p>
+            </div>
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Tiempo restante
-                  </p>
+            {/* TIEMPO EJECUTADO */}
 
-                  <p className="font-semibold text-slate-900">
-                    {n.tiempo_restante} años
-                  </p>
-                </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Tiempo ejecutado
+              </p>
 
-                {/* PERIODOS */}
+              <p className="font-semibold text-slate-900">
+                {n.tiempo_acumulado_hoy} años
+              </p>
+            </div>
 
-                <div>
-                  <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                    Períodos
-                  </p>
+            {/* TIEMPO RESTANTE */}
 
-                  <p className="font-semibold text-slate-900">
-                    {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
-                  </p>
-                </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Tiempo restante
+              </p>
 
-              </div>
+              <p className="font-semibold text-slate-900">
+                {n.tiempo_restante} años
+              </p>
+            </div>
+
+            {/* PERIODOS TOTALES */}
+
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Períodos totales
+              </p>
+
+              <p className="font-semibold text-slate-900">
+                {n.periodos_totales_nombramiento}
+              </p>
+            </div>
+
+            {/* PERIODOS EJECUTADOS */}
+
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Períodos ejecutados
+              </p>
+
+              <p className="font-semibold text-slate-900">
+                {n.periodos_acumulados}
+              </p>
+            </div>
+
+            {/* PERIODOS RESTANTES */}
+
+            <div>
+              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                Períodos restantes
+              </p>
+
+              <p className="font-semibold text-slate-900">
+                {n.periodos_restantes}
+              </p>
+            </div>
+
+            </div>
 
             </div>
 
