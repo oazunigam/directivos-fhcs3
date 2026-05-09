@@ -158,39 +158,50 @@ export default function Home() {
 
               </div>
 
-              <div className="text-right">
+              <div className="flex gap-16 items-start">
 
-                <div className="mb-2">
-                  <span className="font-bold text-lg text-slate-900">
-                    Tiempo acumulado
-                  </span>
+              <div className="text-center">
+                <span className="text-sm text-gray-500 block">
+                  Tiempo acumulado
+                </span>
 
-                  <p className="text-sm text-gray-500">
-                    {n.tiempo_acumulado_hoy} años
-                  </p>
-                </div>
+                <p className="font-bold text-2xl text-slate-900">
+                  {n.tiempo_acumulado_hoy}
+                </p>
 
-                <div className="mb-2">
-                  <span className="font-bold text-lg text-slate-900">
-                    Tiempo restante
-                  </span>
-
-                  <p className="text-sm text-gray-500">
-                    {n.tiempo_restante} años
-                  </p>
-                </div>
-
-                <div>
-                  <span className="font-bold text-lg text-slate-900">
-                    Periodos
-                  </span>
-
-                  <p className="text-sm text-gray-500">
-                    {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
-                  </p>
-                </div>
-
+                <span className="text-sm text-gray-500">
+                  años
+                </span>
               </div>
+
+              <div className="text-center">
+                <span className="text-sm text-gray-500 block">
+                  Tiempo restante
+                </span>
+
+                <p className="font-bold text-2xl text-slate-900">
+                  {n.tiempo_restante}
+                </p>
+
+                <span className="text-sm text-gray-500">
+                  años
+                </span>
+              </div>
+
+              <div className="text-center">
+                <span className="text-sm text-gray-500 block">
+                  Periodos
+                </span>
+
+                <p className="font-bold text-2xl text-slate-900">
+                  {n.periodos_acumulados}
+                  <span className="text-gray-400">
+                    {' '} / {n.periodos_totales_nombramiento}
+                  </span>
+                </p>
+              </div>
+
+            </div>
 
             </div>
 
