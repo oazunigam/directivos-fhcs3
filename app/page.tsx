@@ -43,8 +43,8 @@ export default function Home() {
       .from('vista_nombramientos_metricas')
       .select('*')
 
-    console.log('DATA:', data)
-    console.log('ERROR:', error)
+    console.log(data)
+    console.log(error)
 
     if (data) {
       setNombramientos(data)
@@ -55,7 +55,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-black text-white p-10">
+      <main className="min-h-screen bg-[#f1f5f9] p-10">
         <h1 className="text-4xl font-bold">
           Cargando sistema...
         </h1>
@@ -64,11 +64,11 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f1f5f9] p-8">
+    <main className="min-h-screen bg-[#f1f5f9] p-5">
 
       {/* HEADER */}
 
-      <div className="bg-[#071639] text-white p-8 rounded-2xl mb-8">
+      <div className="bg-[#071639] text-white p-8 rounded-3xl mb-8">
         <h1 className="text-5xl font-bold mb-2">
           Sistema de Directivos Académicos FHCS
         </h1>
@@ -78,26 +78,26 @@ export default function Home() {
         </p>
       </div>
 
-      {/* KPIS */}
+      {/* KPIs */}
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
 
-        <div className="bg-white rounded-2xl p-6 shadow">
-          <p className="text-gray-500 mb-2">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <p className="text-slate-500 mb-2">
             Directivos activos
           </p>
 
-          <h2 className="text-4xl font-bold text-[#071639]">
+          <h2 className="text-5xl font-bold text-[#071639]">
             {nombramientos.length}
           </h2>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow">
-          <p className="text-gray-500 mb-2">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <p className="text-slate-500 mb-2">
             Próximos a vencer
           </p>
 
-          <h2 className="text-4xl font-bold text-orange-500">
+          <h2 className="text-5xl font-bold text-orange-500">
             {
               nombramientos.filter(
                 n => n.proximo_a_vencer
@@ -106,12 +106,12 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow">
-          <p className="text-gray-500 mb-2">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <p className="text-slate-500 mb-2">
             Nombramientos recientes
           </p>
 
-          <h2 className="text-4xl font-bold text-green-600">
+          <h2 className="text-5xl font-bold text-green-600">
             {
               nombramientos.filter(
                 n => n.nombramiento_reciente
@@ -120,12 +120,12 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow">
-          <p className="text-gray-500 mb-2">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <p className="text-slate-500 mb-2">
             Requieren autorización
           </p>
 
-          <h2 className="text-4xl font-bold text-red-600">
+          <h2 className="text-5xl font-bold text-red-600">
             {
               nombramientos.filter(
                 n => n.requiere_autorizacion
@@ -144,24 +144,24 @@ export default function Home() {
 
           <div
             key={n.id}
-            className="bg-white rounded-2xl p-6 shadow"
+            className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200"
           >
 
-            <div className="flex justify-between items-center">
+            <div className="flex items-start justify-between gap-8">
 
               {/* IZQUIERDA */}
 
-              <div>
+              <div className="min-w-[320px] pr-8 border-r border-slate-200">
 
-                <h2 className="text-2xl font-bold text-[#071639]">
+                <h2 className="text-[20px] font-bold text-[#071639] leading-tight">
                   {n.nombres} {n.apellidos}
                 </h2>
 
-                <p className="text-lg text-gray-700">
+                <p className="text-[16px] text-slate-700 mt-2">
                   {n.cargo}
                 </p>
 
-                <p className="text-gray-500 mt-1">
+                <p className="text-slate-500 mt-2">
                   {n.dependencia}
                 </p>
 
@@ -169,138 +169,170 @@ export default function Home() {
 
               {/* DERECHA */}
 
-            <div className="flex items-center gap-12">
+              <div className="flex-1 grid grid-cols-8 gap-6">
 
-            {/* ESTADO */}
+                {/* ESTADO */}
 
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Estado
-              </p>
+                <div>
 
-              <span
-                className={`
-                  px-4 py-1 rounded-full text-sm font-semibold
-                  ${
-                    n.estado === 'activo'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                  }
-                `}
-              >
-                {n.estado}
-              </span>
-            </div>
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Estado
+                  </p>
 
-            {/* VIGENCIA */}
+                  <span
+                    className={`
+                      px-4 py-1 rounded-full text-sm font-semibold
+                      ${
+                        n.estado === 'activo'
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-red-100 text-red-700'
+                      }
+                    `}
+                  >
+                    {n.estado}
+                  </span>
 
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-2">
-                Vigencia
-              </p>
+                </div>
 
-              <div className="space-y-1">
+                {/* VIGENCIA */}
 
-                <p className="font-semibold text-slate-900 text-sm">
-                  Inicio:
-                </p>
+                <div>
 
-                <p className="text-slate-700 text-sm">
-                  {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </p>
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Vigencia
+                  </p>
 
-                <p className="font-semibold text-slate-900 text-sm mt-2">
-                  Fin:
-                </p>
+                  <div className="space-y-2">
 
-                <p className="text-slate-700 text-sm">
-                  {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </p>
+                    <p className="text-sm text-slate-800 leading-tight">
+                      {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </p>
+
+                    <p className="text-sm text-slate-800 leading-tight">
+                      {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {/* TIEMPO TOTAL */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo total nombramiento
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.tiempo_total_nombramiento}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    años
+                  </p>
+
+                </div>
+
+                {/* TIEMPO EJECUTADO */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo ejecutado nombramiento
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.tiempo_acumulado_hoy}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    años
+                  </p>
+
+                </div>
+
+                {/* TIEMPO RESTANTE */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo restante nombramiento
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.tiempo_restante}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    años
+                  </p>
+
+                </div>
+
+                {/* PERIODOS TOTALES */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo total períodos
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.periodos_totales_nombramiento}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    períodos
+                  </p>
+
+                </div>
+
+                {/* PERIODOS EJECUTADOS */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo ejecutado períodos
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.periodos_acumulados}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    períodos
+                  </p>
+
+                </div>
+
+                {/* PERIODOS RESTANTES */}
+
+                <div>
+
+                  <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
+                    Tiempo restante períodos
+                  </p>
+
+                  <p className="font-bold text-[18px] text-slate-900">
+                    {n.periodos_restantes}
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    períodos
+                  </p>
+
+                </div>
 
               </div>
-            </div>
-
-            {/* TIEMPO TOTAL NOMBRAMIENTO */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Tiempo total nombramiento
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.tiempo_total_nombramiento} años
-              </p>
-            </div>
-
-            {/* TIEMPO EJECUTADO */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Tiempo ejecutado
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.tiempo_acumulado_hoy} años
-              </p>
-            </div>
-
-            {/* TIEMPO RESTANTE */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Tiempo restante
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.tiempo_restante} años
-              </p>
-            </div>
-
-            {/* PERIODOS TOTALES */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Períodos totales
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.periodos_totales_nombramiento}
-              </p>
-            </div>
-
-            {/* PERIODOS EJECUTADOS */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Períodos ejecutados
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.periodos_acumulados}
-              </p>
-            </div>
-
-            {/* PERIODOS RESTANTES */}
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Períodos restantes
-              </p>
-
-              <p className="font-semibold text-slate-900">
-                {n.periodos_restantes}
-              </p>
-            </div>
-
-            </div>
 
             </div>
 
