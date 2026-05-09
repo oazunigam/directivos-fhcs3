@@ -1,139 +1,229 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { supabase } from '../src/lib/supabase'
 
-export default async function Home() {
-  const { data: directivos } = await supabase
-    .from('vista_nombramientos_metricas')
-    .select('*')
+type Nombramiento = {
+  id: number
+  nombres: string
+  apellidos: string
+  cargo: string
+  dependencia: string
 
-  const totalActivos =
-    directivos?.filter((d) => d.estado === 'activo').length || 0
+  tiempo_acumulado_hoy: number
+  tiempo_total_nombramiento: number
+  tiempo_restante: number
 
-  const proximosAVencer =
-    directivos?.filter((d) => d.proximo_a_vencer).length || 0
+  periodos_acumulados: number
+  periodos_totales_nombramiento: number
+  periodos_restantes: number
 
-  const recientes =
-    directivos?.filter((d) => d.nombramiento_reciente).length || 0
+  proximo_a_vencer: boolean
+  nombramiento_reciente: boolean
+  requiere_autorizacion: boolean
+}
 
-  const requierenAutorizacion =
-    directivos?.filter((d) => d.requiere_autorizacion).length || 0
+export default function Home() {
+  const [nombramientos, setNombramientos] = useState<Nombramiento[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchNombramientos()
+  }, [])
+
+  async function fetchNombramientos() {
+    const { data, error } = await supabase
+      .from('vista_nombramientos_metricas')
+      .select('*')
+
+    console.log('DATA:', data)
+    console.log('ERROR:', error)
+
+    if (data) {
+      setNombramientos(data)
+    }
+
+    setLoading(false)
+  }
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-black text-white p-10">
+        <h1 className="text-4xl font-bold">
+          Cargando sistema...
+        </h1>
+      </main>
+    )
+  }
 
   return (
-    <main className="min-h-screen bg-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* HEADER */}
-        <div className="bg-[#031749] rounded-2xl p-8 text-white mb-8">
-          <h1 className="text-5xl font-bold">
-            Sistema de Directivos Académicos FHCS
-          </h1>
+    <main className="min-h-screen bg-[#f1f5f9] p-8">
 
-          <p className="text-2xl mt-3 opacity-90">
-            Facultad de Humanidades y Ciencias Sociales
+      {/* HEADER */}
+
+      <div className="bg-[#071639] text-white p-8 rounded-2xl mb-8">
+        <h1 className="text-5xl font-bold mb-2">
+          Sistema de Directivos Académicos FHCS
+        </h1>
+
+        <p className="text-xl text-slate-300">
+          Facultad de Humanidades y Ciencias Sociales
+        </p>
+      </div>
+
+      {/* TARJETAS KPI */}
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <p className="text-gray-500 mb-2">
+            Directivos activos
           </p>
+
+          <h2 className="text-4xl font-bold text-[#071639]">
+            {nombramientos.length}
+          </h2>
         </div>
 
-        {/* TARJETAS */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <p className="text-gray-500 mb-2">
+            Próximos a vencer
+          </p>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-slate-500">Directivos activos</p>
-
-            <h2 className="text-5xl font-bold mt-2 text-[#031749]">
-              {totalActivos}
-            </h2>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-slate-500">Próximos a vencer</p>
-
-            <h2 className="text-5xl font-bold mt-2 text-orange-500">
-              {proximosAVencer}
-            </h2>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-slate-500">Nombramientos recientes</p>
-
-            <h2 className="text-5xl font-bold mt-2 text-green-600">
-              {recientes}
-            </h2>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-slate-500">Requieren autorización</p>
-
-            <h2 className="text-5xl font-bold mt-2 text-red-600">
-              {requierenAutorizacion}
-            </h2>
-          </div>
-
+          <h2 className="text-4xl font-bold text-orange-500">
+            {
+              nombramientos.filter(
+                n => n.proximo_a_vencer
+              ).length
+            }
+          </h2>
         </div>
 
-        {/* LISTADO */}
-        <div className="space-y-6">
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <p className="text-gray-500 mb-2">
+            Nombramientos recientes
+          </p>
 
-          {directivos?.map((director) => (
-            <div
-              key={director.id}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
-            >
-              <div className="flex justify-between items-start">
+          <h2 className="text-4xl font-bold text-green-600">
+            {
+              nombramientos.filter(
+                n => n.nombramiento_reciente
+              ).length
+            }
+          </h2>
+        </div>
 
-                <div>
-                  <h2 className="text-4xl font-bold text-slate-900">
-                    {director.nombre_completo}
-                  </h2>
+        <div className="bg-white rounded-2xl p-6 shadow">
+          <p className="text-gray-500 mb-2">
+            Requieren autorización
+          </p>
 
-                  <p className="font-bold text-lg text-slate-900 mt-2">
-                    {director.cargo}
-                  </p>
-
-                  <p className="text-slate-600 text-lg mt-1">
-                    {director.dependencia}
-                  </p>
-                </div>
-
-                <div className="text-right space-y-4">
-
-                  <div>
-                    <p className="text-sm text-slate-500">
-                      Tiempo acumulado
-                    </p>
-
-                    <p className="text-2xl font-bold text-slate-900">
-                      {director.tiempo_acumulado_hoy} años
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-slate-500">
-                      Tiempo restante
-                    </p>
-
-                    <p className="text-2xl font-bold text-slate-900">
-                      {director.tiempo_restante} años
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-slate-500">
-                      Periodos
-                    </p>
-
-                    <p className="text-2xl font-bold text-slate-900">
-                      {director.periodos_acumulados} / {director.periodos_totales}
-                    </p>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          ))}
-
+          <h2 className="text-4xl font-bold text-red-600">
+            {
+              nombramientos.filter(
+                n => n.requiere_autorizacion
+              ).length
+            }
+          </h2>
         </div>
 
       </div>
+
+      {/* LISTADO */}
+
+      <div className="space-y-6">
+
+        {nombramientos.map((n) => (
+
+          <div
+            key={n.id}
+            className="bg-white rounded-2xl p-6 shadow"
+          >
+
+            <div className="flex justify-between items-start">
+
+              <div>
+
+                <h2 className="text-2xl font-bold text-[#071639]">
+                  {n.nombres} {n.apellidos}
+                </h2>
+
+                <p className="text-lg text-gray-700">
+                  {n.cargo}
+                </p>
+
+                <p className="text-gray-500 mt-1">
+                  {n.dependencia}
+                </p>
+
+              </div>
+
+              <div className="text-right">
+
+                <div className="mb-2">
+                  <span className="text-sm text-gray-500">
+                    Tiempo acumulado
+                  </span>
+
+                  <p className="font-bold text-lg">
+                    {n.tiempo_acumulado_hoy} años
+                  </p>
+                </div>
+
+                <div className="mb-2">
+                  <span className="text-sm text-gray-500">
+                    Tiempo restante
+                  </span>
+
+                  <p className="font-bold text-lg">
+                    {n.tiempo_restante} años
+                  </p>
+                </div>
+
+                <div>
+                  <span className="text-sm text-gray-500">
+                    Periodos
+                  </span>
+
+                  <p className="font-bold text-lg">
+                    {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* ALERTAS */}
+
+            <div className="flex gap-3 mt-6 flex-wrap">
+
+              {n.proximo_a_vencer && (
+                <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+                  Próximo a vencer
+                </span>
+              )}
+
+              {n.nombramiento_reciente && (
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                  Nombramiento reciente
+                </span>
+              )}
+
+              {n.requiere_autorizacion && (
+                <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">
+                  Requiere autorización
+                </span>
+              )}
+
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
     </main>
   )
 }
