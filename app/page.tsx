@@ -165,17 +165,17 @@ export default function Home() {
                     Tiempo acumulado
                   </span>
 
-                  <p className="font-bold text-lg">
+                  <p className="font-bold text-lg text-slate-900">
                     {n.tiempo_acumulado_hoy} años
                   </p>
                 </div>
 
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">
+                  <span className="font-bold text-lg text-slate-900">
                     Tiempo restante
                   </span>
 
-                  <p className="font-bold text-lg">
+                  <p className="font-bold text-lg text-slate-900">
                     {n.tiempo_restante} años
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export default function Home() {
                     Periodos
                   </span>
 
-                  <p className="font-bold text-lg">
+                  <p className="font-bold text-lg text-slate-900">
                     {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
                   </p>
                 </div>
