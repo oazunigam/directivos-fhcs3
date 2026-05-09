@@ -175,17 +175,17 @@ export default function Home() {
                     Tiempo restante
                   </span>
 
-                  <p className="font-bold text-lg text-slate-900">
+                  <p className="text-sm text-gray-500">
                     {n.tiempo_restante} años
                   </p>
                 </div>
 
                 <div>
-                  <span className="text-sm text-gray-500">
+                  <span className="font-bold text-lg text-slate-900">
                     Periodos
                   </span>
 
-                  <p className="font-bold text-lg text-slate-900">
+                  <p className="text-sm text-gray-500">
                     {n.periodos_acumulados} / {n.periodos_totales_nombramiento}
                   </p>
                 </div>
