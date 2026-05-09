@@ -36,7 +36,7 @@ export default function HomePage() {
         </h1>
 
         <p className="text-zinc-400 mt-4 text-lg">
-          Plataforma institucional conectada a Supabase
+          Plataforma institucional conectada a Supabase ok
         </p>
       </div>
 
