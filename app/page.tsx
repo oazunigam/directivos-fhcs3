@@ -204,7 +204,7 @@ export default function Home() {
 
                   <div className="space-y-2">
 
-                    <p className="text-sm text-slate-800 leading-tight">
+                    <p className="text-sm text-slate-800 leading-tight whitespace-nowrap">
                       {new Date(n.fecha_inicio).toLocaleDateString('es-CO', {
                         day: '2-digit',
                         month: 'long',
@@ -212,7 +212,7 @@ export default function Home() {
                       })}
                     </p>
 
-                    <p className="text-sm text-slate-800 leading-tight">
+                    <p className="text-sm text-slate-800 leading-tight whitespace-nowrap">
                       {new Date(n.fecha_fin).toLocaleDateString('es-CO', {
                         day: '2-digit',
                         month: 'long',
@@ -283,7 +283,7 @@ export default function Home() {
                 <div>
 
                   <p className="text-[11px] uppercase tracking-wide text-slate-400 leading-tight mb-2">
-                    Tiempo total períodos
+                    Tiempo total<br />períodos
                   </p>
 
                   <p className="font-bold text-[18px] text-slate-900">
