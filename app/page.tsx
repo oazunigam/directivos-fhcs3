@@ -198,7 +198,7 @@ export default function Home() {
 
             <div>
               <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                Vigencia
+                Vigenciaa
               </p>
 
               <p className="font-semibold text-slate-900">
